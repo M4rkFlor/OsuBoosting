@@ -1,4 +1,4 @@
-# Ripple Boosting Website
+# [Ripple Boosting Website](https://osu-boost.herokuapp.com/ "https://osu-boost.herokuapp.com/")
 I open sourced the code to my website, if you want to run a local instance to check out the admin pannel you need to have node.js and mongodb installed, Also you need to set these enviroment varibles:  
 process.env.MONGOOSE_URI //mongodb://localhost:27017/userdb  
 process.env.HOST //localhost:3000  
