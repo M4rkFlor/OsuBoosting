@@ -1,0 +1,20 @@
+List all Images
+docker images
+
+List all containers
+docker ps
+
+build image
+docker build -t image-name .  // " ." for current dircectory 
+
+run image/create container
+docker run -p 8082:3000 image-name  // -p maps 3000->8082 multiple ports can be exposed by adding another -p
+
+Stop all running containers
+docker stop $(docker ps -aq)
+
+Remove all containers
+docker rm $(docker ps -aq) // or container name
+
+Remove all images
+docker rmi $(docker images -q) // or image name

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<!--   -->
+<html lang="en">
+  <head>
+   <meta charset="utf-8"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link rel="stylesheet" type="text/css" href="footable/css/footable.standalone.min.css">
+<style>
+
+html *{
+   font-size: 16px;
+   line-height: 1.5;
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    
+}
+p{
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+body {
+    background-color: rgb(248,193,193);
+}
+h1 {
+    color: black;
+}
+.col{
+    background-color: rgb(255,255,255);
+}
+
+    
+.table .table {
+    background-color: rgb(248,193,193);
+}
+.footable-details{
+    padding: 0px;
+}
+.footable-details.table>thead>tr>td, .footable-details.table>thead>tr>th, .footable.table>thead>tr>td, .footable.table>thead>tr>th {
+    border-bottom: 2px solid rgb(208,153,153);
+}
+.footable-details.table>tbody>tr>td, .footable-details.table>tbody>tr>th, .footable-details.table>tfoot>tr>td, .footable-details.table>tfoot>tr>th, .footable-details.table>thead>tr>td, .footable-details.table>thead>tr>th, .footable.table>tbody>tr>td, .footable.table>tbody>tr>th, .footable.table>tfoot>tr>td, .footable.table>tfoot>tr>th, .footable.table>thead>tr>td, .footable.table>thead>tr>th {
+    border-top: 1px solid rgb(208,153,153);
+}
+/*osu drop down button*/
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content.show{
+    display: block;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown a:hover {background-color: #ddd;}
+    
+/* form complete*/
+.complete-form {
+    display: none;
+    position: absolute;
+    
+    margin: auto;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.complete-form.show{
+    display: block;
+}
+/*makes div look like button*/
+.form-container { 
+color: #ffffff; 
+background-color: #28A745; 
+border-color: #28A745;
+align-items:flex-start;
+font-stretch:100%;
+font-style:normal;
+font-variant-caps:normal;
+font-variant-east-asian:normal;
+font-variant-ligatures:normal;
+font-variant-numeric:normal;
+font-weight:400;
+height:34px;
+letter-spacing:normal;
+line-height:20px;
+margin-bottom:0px;
+margin-left:0px;
+margin-right:0px;
+margin-top:0px;
+overflow-x:visible;
+overflow-y:visible;
+padding-bottom:6px;
+padding-left:12px;
+padding-right:12px;
+padding-top:6px;
+text-align:center;
+text-indent:0px;
+text-rendering:auto;
+text-shadow:none;
+text-transform:none;
+touch-action:manipulation;
+user-select:none;
+vertical-align:middle;
+white-space:nowrap;
+
+word-spacing:0px;
+writing-mode:horizontal-tb;
+-webkit-appearance: none !important;
+-webkit-border-horizontal-spacing:0px;
+-webkit-border-vertical-spacing:0px;
+-webkit-border-image:none;
+} 
+
+.form-container:hover, 
+.form-container:focus, 
+.form-container:active, 
+.form-container.active, 
+.open .dropdown-toggle.form-container { 
+  color: #ffffff; 
+  background-color: #28a745; 
+  border-color: #28A745; 
+} 
+ 
+.form-container:active, 
+.form-container.active, 
+.open .dropdown-toggle.form-container { 
+  background-image: none; 
+} 
+ 
+.form-container.disabled, 
+.form-container[disabled], 
+fieldset[disabled] .form-container, 
+.form-container.disabled:hover, 
+.form-container[disabled]:hover, 
+fieldset[disabled] .form-container:hover, 
+.form-container.disabled:focus, 
+.form-container[disabled]:focus, 
+fieldset[disabled] .form-container:focus, 
+.form-container.disabled:active, 
+.form-container[disabled]:active, 
+fieldset[disabled] .form-container:active, 
+.form-container.disabled.active, 
+.form-container[disabled].active, 
+fieldset[disabled] .form-container.active { 
+    opacity: .64;
+    background-color: #777777;
+    border-color: #777777;
+    cursor: default;
+} 
+ 
+.form-container .badge { 
+  color: #28A745; 
+  background-color: #ffffff; 
+}
+    
+button.btn.btn-success:disabled {
+    opacity: .64;
+    background-color: #777777;
+    border-color: #777777;
+    cursor: default;
+}
+button.btn.btn-danger:disabled {
+    opacity: .64;
+    background-color: #777777;
+    border-color: #777777;
+    cursor: default;
+}
+</style>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>  
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="footable/js/footable.min.js"></script>
+    <script text="js">
+        /*
+    jQuery(function($){
+	$('.table').footable({
+		"columns": [
+  {"name":"UserLocation","title":"User Location","breakpoints":"xs"},
+  {"name":"SiteName","title":"Site Name","breakpoints":"xs"},
+  {"name":"date","title":"Date Purchased","type":"date","formatString":"MMM D YYYY hmsa"},
+  {"name":"Status","title":"Status","type":"text"},
+  {"name":"html","title":"Osu!","type":"html","breakpoints":"xs sm"},
+  {"name":"osuUser","title":"Never seen but always around","visible":false,"filterable":false},
+  {"name":"osuPass","title":"Never seen but always around","visible":false,"filterable":false}
+],
+		"rows":[
+  {UserLocation: 'CA',SiteName: 'Slayer65', date: 'Jan 5 2018 4:18:47pm', Status: 'completed',html: '<div class="dropdown"><button rel="noopener" rel="nofollow" value="Osu!"  class="btn btn-info dropbtn">Osu! <span class="caret"></span></button><div id="myDropdown0" class="dropdown-content"><a href="#home">osuUser</a><a href="#about">Password</a></div></div>',osuUser:"cookieze",osuPass:"mypass123%"},
+  {UserLocation: 'CA',SiteName: 'Slayer65', date: 'Jan 5 2018 4:18:47pm', Status: 'completed',html: '<div class="dropdown"><button rel="noopener" rel="nofollow" value="Osu!"  class="btn btn-info dropbtn">Osu! <span class="caret"></span></button><div id="myDropdown0" class="dropdown-content"><a href="#home">osuUser</a><a href="#about">Password</a></div></div>',osuUser:"sdf",osuPass:"mypassst4s123%"}
+]
+	});
+});
+*/
+</script>
+    <title>Admin CRM Osu! Boosting </title>
+  </head>
+   <body>  
+        
+
+
+
+
+<!-- footable -->
+<!--
+<table class="table" data-sorting="true" data-filtering="true" data-filter-delay="-1">
+	<thead>
+		<tr>
+			<!--
+			<th data-breakpoints="xs" data-type="number" data-visible="false">ID</th>
+			<th data-breakpoints="xs">User's Location</th>
+			<th data-breakpoints="xs">Site Name</th>
+			<th data-type="date" data-format-string="MMM D YYYY hmsa">date purchased</th>
+			<th data-type="text">Status</th>
+			<th data-breakpoints="xs sm" data-type="html">Osu!</th>
+			<th data-breakpoints="xs sm">Refund</th>
+			<th data-breakpoints="xs sm">Complete</th>
+			-->
+			<!--
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td >1</td>
+			<td>California</td>
+			<td>Legend27</td>
+			<td>Jan 4 2018 4:18:27pm</td>
+			<td>Completed</td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-info" value="Osu!">Osu!</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-danger" value="Refund">Refund</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-success" value="Complete">Complete</button></td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>California</td>
+			<td>Slayer</td>
+			<td>Jan 3 2018 4:18:27pm</td>
+			<td>Ongoing</td>
+			<td><div class="dropdown">
+            <button rel="noopener" rel="nofollow" value="Osu!"  class="btn btn-info dropbtn">Osu! <span class="caret"></span></button>
+              <div id="myDropdown0" class="dropdown-content">
+                <a href="#home">Username</a>
+                <a href="#about">Password</a>
+              </div>
+            </div></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-danger" value="Refund">Refund</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-success" value="Complete">Complete</button></td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>California</td>
+			<td>Legend27</td>
+			<td>Jan 6 2018 4:18:27pm</td>
+			<td>never</td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-info" value="Osu!">Osu!</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-danger" value="Refund">Refund</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-success" value="Complete">Complete</button></td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>California</td>
+			<td>Legend27</td>
+			<td>Jan 9 2018 4:18:27pm</td>
+			<td>Ongoing</td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-info" value="Osu!">Osu!</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-danger" value="Refund">Refund</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-success" value="Complete">Complete</button></td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>California</td>
+			<td>Legend27</td>
+			<td>Jan 15 2018 4:18:27pm</td>
+			<td>Ongoing</td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-info" value="Osu!">Osu!</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-danger" value="Refund">Refund</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-success" value="Complete">Complete</button></td>
+		</tr>
+		<tr>
+			<td>6</td>
+			<td>California</td>
+			<td>Legend27</td>
+			<td>Jan 5 2018 4:18:27pm</td>
+			<td>Completed</td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-info" value="Osu!">Osu!</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-danger" value="Refund">Refund</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-success" value="Complete">Complete</button></td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>California</td>
+			<td>Legend27</td>
+			<td>Jan 5 2018 4:18:27pm</td>
+			<td>Ongoing</td>
+			<td>
+           <div class="dropdown">
+            <button rel="noopener" rel="nofollow" value="Osu!" class="btn btn-info dropbtn">Osu! <span class="caret"></span></button>
+              <div id="myDropdown1" class="dropdown-content">
+                <a href="#home">Username</a>
+                <a href="#about">Password</a>
+              </div>
+            </div>
+            </td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-danger" value="Refund">Refund</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-success" value="Complete">Complete</button></td>
+		</tr>
+		<tr>
+			<td>8</td>
+			<td>California</td>
+			<td>Legend27</td>
+			<td>Jan 5 2018 4:18:27pm</td>
+			<td>never</td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-info" value="Osu!">Osu!</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-danger" value="Refund">Refund</button></td>
+			<td><button rel="noopener" rel="nofollow" type="submit" class="btn btn-success" value="Complete">Complete</button></td>
+		</tr>
+	</tbody>
+</table>
+-->
+<a href="/session">Profile</a>
+<div id="container"></div>
+<script>
+/*Toggle dropdown*/
+/*
+$(function() {
+  $(".dropbtn").click(function(e) {
+    e.preventDefault();
+     if($(".dropdown-content").hasClass("show")){
+         $(".dropdown-content").removeClass('show'); //use $(this).siblings to keep dropdowns open
+     }
+    else
+    {
+        let Tables = $(this).parent().parent().siblings();
+        let index = Tables.length-1;
+        let username = Tables[index-1].textContent;
+        let pass = Tables[index].textContent;
+        $(this).siblings(".dropdown-content").addClass("show");//Display the clicked dropdown
+        let dropdown = $(this).siblings(".dropdown-content")[0].getElementsByTagName('a');
+        dropdown[0].textContent=username;//enter the username and password in the dropdown
+        dropdown[1].textContent=pass;
+    } 
+  });
+});
+    //closses all dropdowns when clicking off
+window.onclick = function(event) {
+    //console.log("window.onlclik: " + event.target.className == "btn btn-info dropbtn");
+  if (!(event.target.matches('.dropbtn')||event.target.matches('.caret'))) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+*/
+</script>
+
+
+
+
+
+
+
+<script type="text/babel">
+
+
+
+class DropDownbtn extends React.Component {
+
+ constructor(props) {
+    super(props);
+    this.state = {show: "dropdown-content"};
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+      $(".dropbtn").off("click",".dropbtn");
+  }
+
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+
+  handleClickOutside(event) {               
+      if(event.target.tagName.toLowerCase() === 'a')
+      {
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        event.preventDefault();//lmao wtf is this
+        let copyText = event.target.getAttribute("value");
+        let el = document.createElement('textarea');// Create new temp element
+        el.value = copyText;// Set value (string to be copied)
+        // Set non-editable to avoid focus and move outside of view
+        el.setAttribute('readonly', '');
+        el.style = {position: 'absolute', left: '-9999px'};
+        document.body.appendChild(el);
+        el.select();// Select text inside element
+        document.execCommand('copy');// Copy text to clipboard
+        document.body.removeChild(el);// Remove temporary element
+        return false;
+      }
+          if(event.target.isEqualNode(this.wrapperRef)||event.target.parentNode.isEqualNode(this.wrapperRef))
+          {
+              //clicked osu! button
+                      //jquery here
+              console.log(event.target);
+               console.log(this.wrapperRef);
+                      $(function() {
+                          $(".dropbtn").click(function(e) {
+                              e.stopPropagation();
+                              e.stopImmediatePropagation();
+                              e.preventDefault();//lmao wtf is this
+                              if($(".dropdown-content").hasClass("show")){
+                                  $(".dropdown-content").removeClass('show'); //use $(this).siblings to keep dropdowns open
+                              }
+                              else
+                              {
+                                  $(this).siblings(".dropdown-content").addClass("show");//Display the clicked dropdown
+                              }
+                          });
+                      });
+        }
+        else{
+            // did not click osu! button // closses all osu! dropdowns //
+            window.onclick = function(event) {
+                if (!(event.target.matches('.dropbtn')||event.target.matches('.caret')) && event.target.tagName.toLowerCase() !== 'a') {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    var i;
+                    for (i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+                }
+            }
+        }
+  }
+
+  render() {
+    return (
+			<td className="dropdown " value={this.state.show}>
+                <button ref={this.setWrapperRef} rel="noopener" rel="nofollow" value="Osu!"  className="btn btn-info dropbtn" >Osu! <span className="caret"></span></button>
+                  <div className="dropdown-content">
+                    <a value={this.props.osuUser}>{this.props.osuUser}</a>
+                    <a value={this.props.osuPass}>{this.props.osuPass}</a>
+                  </div>
+            </td>
+    );
+  }
+}
+
+class Row extends React.Component {
+    constructor(props) {
+    super(props);
+    this.state = {completedBMs: '', status: this.props.order.status, clickedRefund: false};
+    this.handleClick = this.handleClick.bind(this);
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.handleBmChange = this.handleBmChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+    
+  handleClick(e) {
+      if(e.target.getAttribute("value")==="Refund")
+          {
+            if(!this.state.clickedRefund){
+            this.setState({ clickedRefund: true });
+              console.log(e.target.getAttribute("value"));
+              $.post("/refund", {order_id: this.props.order._id, saleID: this.props.order.saleID}, (result)=>{
+             if(result=="refunded payment succsess")
+                 {
+                  console.log("refund fine here " + result.status);
+                  window.location.reload(false);
+                 }
+             else{
+                  console.log(result.error);
+                  alert(result.error);
+             }
+          });
+            }
+          }
+      else if (e.target.getAttribute("value")==="Complete" && !e.target.hasAttribute("disabled")){
+          console.log(e.target.getAttribute("value"));
+          //togle class show on form
+                              e.stopPropagation();
+                              e.preventDefault();
+                              if(e.target.getElementsByTagName("form")[0].classList.contains("show")){
+                                  e.target.getElementsByTagName("form")[0].classList.remove("show"); //use $(this).siblings to keep dropdowns open
+                              }
+                              else
+                              {
+                                  e.target.getElementsByTagName("form")[0].classList.add("show");//Display the clicked dropdown
+                              }
+      }
+  }
+    
+    handleBmChange(event) {
+    this.setState({completedBMs: event.target.value});
+  }
+    
+     handleSubmit(e) {
+         //ajax complete order
+         console.log(this.state.completedBMs.length);
+         if(this.state.completedBMs.length>20){
+         $.post("/complete", {order_id: this.props.order._id, BMs: this.state.completedBMs}, (result)=>{
+             if(result.error!=null)
+                 {
+                  console.log("an error occured trying to complete a user: " + result.error);
+                  alert("an error occured trying to complete a user: " + result.error);
+                 }
+             else{
+             console.log("fine here "+result.status);
+             //this.setState({status: result.status}); //this line causes react errors fast solution is to refresh page
+             window.location.reload(false); // false means reload from cache true means reload from server
+             }
+             
+        });
+     }
+    e.preventDefault();
+    //return false;
+  }
+    
+setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+    
+  render() {
+    const order = this.props.order;
+     let completable = "";
+      let status = this.state.status;
+    if(status==="completed"||status==="never"||status==="Refunded")
+      {
+          completable = "disabled";
+      }
+      else
+          {
+           status = <span style={{color: 'red'}}>
+            {status}
+          </span>;
+          completable = "";
+          }
+      const linksHtml = [];
+      order.boostedBMs.forEach((BM,index) => {
+      linksHtml.push(
+        <a href={BM} key={index}><i className="fooicon fa fa-music" aria-hidden="true"></i></a>
+      );
+    });
+      
+    return (
+        <tr>
+			<td>{order.country}</td>
+			<td>{order.username}</td>
+			<td>{order.DateOrdered}</td>
+			<td>{status}</td>
+            <DropDownbtn osuUser = {order.osu_username} osuPass = {order.osu_password} key={order.username}/>
+			<td><button onClick={this.handleClick} rel="noopener" rel="nofollow" type="submit" className="btn btn-danger" value="Refund" disabled={completable}>Refund</button></td>
+			<td><div onClick={this.handleClick} rel="noopener" rel="nofollow" type="submit" className="btn btn-success form-container" value="Complete" disabled={completable} ref={this.setWrapperRef}>Complete
+			<form className="complete-form" onSubmit={this.handleSubmit}>
+            <input type="text" name="boostedBMs" className="form-control" placeholder="Beat Map" value={this.state.completedBMs} onChange={this.handleBmChange}></input>
+            <button type="submit" className="btn btn-block btn-success">complete</button>
+			</form>
+			</div></td>
+			<td>{linksHtml}</td>
+		</tr>
+    );
+  }
+}
+
+class Table extends React.Component {
+constructor(props) {
+  super(props);
+  // Don't call this.setState() here!
+  this.state = { orders: null };
+}
+ componentDidMount() {
+           if ($('body').hasClass('mobile')) {
+$('.body').css({ height: window.outerHeight});
+}
+ $.get("/orders",(data)=>{
+		if (data)//get users and format them correctly
+            {
+                console.log(data.orders);
+                if(data.orders.length>1){
+                data.orders.forEach((order)=>{
+                    if(order.DateOrdered!=null){
+                    console.log("NOt null here" + order.DateOrdered);
+                    let date = moment(order.DateOrdered);
+                    order.DateOrdered = date.utc().local().format('MM/D/YYYY-h:mma');
+                    }
+                    else
+                    {
+                        order.DateOrdered="admin";//one of the items was an admin, admin is possible also if the order is already completed will defualt to admin aswell
+                    }
+                });
+                }
+                else{
+                    //only one item
+                    if(data.orders.DateOrdered!=null){
+                    console.log(data.orders.DateOrdered);
+                    let date = moment(data.orders.DateOrdered);
+                    data.orders.DateOrdered = date.utc().local().format('MM/D/YYYY-h:mma');
+                    }
+                    else
+                    {
+                        data.orders.DateOrdered="admin";//only one item that is an admin
+                    }
+                }
+                this.setState({orders: data.orders});
+                jQuery(ReactDOM.findDOMNode(this.refs.sampletable)).footable();
+            }
+      else{
+          alert("could not load orders or no order data");
+      }
+	});
+}
+    
+  render() {
+      
+    const rows = [];
+    if(this.state.orders)
+    if(this.state.orders.length>1)
+        {
+    this.state.orders.forEach((order) => {
+    if(!order.admin)//dont show myself
+      rows.push(
+        <Row
+          order={order}
+          key={order._id}
+        />
+      );
+    });
+        }
+      else{
+          <Row
+          order={this.state.orders}
+          key={this.state.orders._id}
+          />
+      }
+
+
+    return (
+<table ref="sampletable" className="table" data-sorting="true" data-filtering="true" data-filter-delay="0.001">
+	<thead>
+		<tr>
+			<th data-breakpoints="xs">User's Location</th>
+			<th data-breakpoints="xs">Site Name</th>
+			<th data-type="date" data-format-string="MM/D/YYYY-h:mma">date purchased</th>
+			<th data-type="text" data-sorted="true">Status</th>
+			<th data-breakpoints="xs sm" data-type="html" data-sortable="false">Osu!</th>
+			<th data-breakpoints="xs sm" data-filterable="false" data-type="html" data-sortable="false">Refund</th>
+			<th data-breakpoints="xs sm" data-filterable="false" data-type="html" data-sortable="false">Complete</th>
+			<th data-breakpoints="xs sm" data-type="html" data-sortable="false">Beat Maps</th>
+		</tr>
+	</thead>
+   <tbody>{rows}</tbody>
+</table>
+    );
+  }
+}
+
+/* UserLocation//Site Name//date purchased//Status//Osu!//Refund//Complete//BoostedBMs*/
+/*const ORDERS = [
+  {UserLocation: 'CA',SiteName: 'Slayer65', date: 'Jan 5 2018 4:18:47pm', Status: 'completed', refundLink:'https://api.sandbox.paypal.com/v1/payments/sale/7CB98514DU810652Y/refund',osuUser:'cookieze',osuPass:'mypass123%',boostedBMs:["http://104.20.52.28/beatmapsets/758172#osu/1594851","http://104.20.52.28/beatmapsets/775649#fruits/1631988", "http://104.20.52.28/beatmapsets/775649#fruits/1699795" ]},
+  {UserLocation: 'CA',SiteName: 'jeff', date: 'Jan 5 2018 4:18:55pm', Status: 'ongoing',osuUser:'usero',osuPass:'asgasdg#@%',boostedBMs:["http://104.20.52.28/beatmapsets/758172#osu/1594851","http://104.20.52.28/beatmapsets/775649#fruits/1631988", "http://104.20.52.28/beatmapsets/775649#fruits/1699795" ]},
+    {UserLocation: 'WB',SiteName: 'gordon', date: 'Jan 5 2018 6:32:27pm', Status: 'never',osuUser:'azer',osuPass:'sdgfsdg^^%',boostedBMs:["http://104.20.52.28/beatmapsets/758172#osu/1594851","http://104.20.52.28/beatmapsets/775649#fruits/1631988", "http://104.20.52.28/beatmapsets/775649#fruits/1699795" ]},
+    {UserLocation: 'EU',SiteName: 'addam', date: 'Jan 9 2018 9:18:27pm', Status: 'completed',osuUser:'blackee',osuPass:'mypaSSs123%',boostedBMs:["http://104.20.52.28/beatmapsets/758172#osu/1594851","http://104.20.52.28/beatmapsets/775649#fruits/1631988", "http://104.20.52.28/beatmapsets/775649#fruits/1699795" ]},
+    {UserLocation: 'NA',SiteName: 'tom', date: 'Jan 9 2018 4:17:27pm', Status: 'ongoing', refundLink:'https://api.sandbox.paypal.com/v1/payments/sale/7CB98514DU810652Y/refund',osuUser:'gorden',osuPass:'sdf#@@%',boostedBMs:["http://104.20.52.28/beatmapsets/758172#osu/1594851","http://104.20.52.28/beatmapsets/775649#fruits/1631988", "http://104.20.52.28/beatmapsets/775649#fruits/1699795" ]},
+    {UserLocation: 'Fr',SiteName: 'fill', date: 'Jan 3 2018 4:25:27pm', Status: 'completed',osuUser:'goldtoe',osuPass:'#$sdgf%',boostedBMs:["http://104.20.52.28/beatmapsets/758172#osu/1594851","http://104.20.52.28/beatmapsets/775649#fruits/1631988", "http://104.20.52.28/beatmapsets/775649#fruits/1699795" ]},
+    {UserLocation: 'US',SiteName: 'derk', date: 'Jan 3 2018 4:18:27pm', Status: 'never',osuUser:'moocow',osuPass:'SH$%%',boostedBMs:["http://104.20.52.28/beatmapsets/758172#osu/1594851","http://104.20.52.28/beatmapsets/775649#fruits/1631988", "http://104.20.52.28/beatmapsets/775649#fruits/1699795" ]},
+    {UserLocation: 'SP',SiteName: 'jon', date: 'Jan 6 2018 4:18:27pm', Status: 'completed',osuUser:'haczer',osuPass:'dsfg^@W%',boostedBMs:["http://104.20.52.28/beatmapsets/758172#osu/1594851","http://104.20.52.28/beatmapsets/775649#fruits/1631988", "http://104.20.52.28/beatmapsets/775649#fruits/1699795" ]}
+];*/
+
+ReactDOM.render(
+  <Table />,
+  document.getElementById('container')
+);
+</script>
+
+  </body>
+</html> 
+  

@@ -1,0 +1,30 @@
+Open cmd and CD ./{ToProjectDirectory}
+>npm install
+
+The above will create node_modules and download the
+modules from package.json and put in node_modules
+folder.
+
+in command window anywhere type, Must have mongoDB installed.
+>mongod
+
+CD ./ToProjectDirectory project directory type
+>node index.js
+
+wait a while and the following should appear
+> waiting to connect to mongo
+> Server started on port 3000
+> Connected to mongo in async after wait
+
+bring up browser and type in url
+localhost:3000
+
+Now you can see the web app.
+
+process.env.MONGOOSE_URI //mongodb://localhost:27017/userdb
+process.env.HOST //localhost:3000
+process.env.GMAIL_USER //example@gmail.com
+process.env.GMAIL_PASS //email is used for email confirmation, also need to set your email account enable Less secure apps.
+process.env.EMAIL_SECRET //can be random characters
+process.env.SESSION_SECRET //can be random characters
+process.env.PORT //3000 by defualt 

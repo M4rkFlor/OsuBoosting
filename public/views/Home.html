@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!--   -->
+<html lang="en">
+  <head>
+   <meta charset="utf-8"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+           <style>
+body {
+    background-color: rgb(248,193,193);
+}
+h1 {
+    color: black;
+}
+.osu_ImageContent {
+    text-align: center;
+    color: #fff;
+    font-size: 3.5rem;
+    font-family: roboto;
+    font-weight: 1000;
+    margin-top: 0px;
+    padding: 20px;
+    text-transform: initial;
+    line-height: 40px; 
+}
+.nav-link {
+    color: rgba(0,0,0,1)!important;        
+}
+</style>
+        <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+        
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+    
+    <title>Osu! Boosting</title>
+  </head>
+   <body>  
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:  transparent!important">
+    <div class="d-flex flex-grow-1">
+        <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
+        <a class="navbar-brand d-none d-lg-inline-block" href="/session">
+            Profile
+        </a>
+        <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="/session">
+            <img src="//placehold.it/40?text=LOGO" alt="logo">
+        </a>
+        <div class="w-100 text-right">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+    <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+            <li class="nav-item">
+                <a href="/about" class="nav-link m-2 menu-item">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="/login" class="nav-link m-2 menu-item">Login</a>
+            </li>
+            <li class="nav-item">
+                <a href="/signup" class="nav-link m-2 menu-item">Signup</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="osu_ImageContent" >Ripple PP Boosting</div>
+<img src="../Images/BostingOsuLogo.png" alt="Osu! Image" width="auto" class=" img-fluid mx-auto d-block" style="height: 35vh">
+
+
+
+
+
+<div style="background:rgb(248,193,193) !important" class="jumbotron jumbotron-fluid">
+  <div class="container text-center">
+    <h1 class="display-4 text-center">Top plays for <span style="text-decoration: line-through;">1$</span> Free</h1>
+    <br>
+    <p class="lead ">I will get you a top play up to 200pp</p>
+    <p class="lead ">I will play one song</p>
+    <p class="lead ">My goal is to basically get you to increase your total pp count by +1pp</p>
+    <div id="payButton"></div>
+  </div>
+</div>
+      
+     
+<script type="text/babel">
+
+//Create a component.
+class PayPalButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isEnabled: true, isLoggedIn: false};
+    this.handleButton = this.handleButton.bind(this);
+    this.handleLoad = this.handleLoad.bind(this);
+  }
+    
+    componentDidMount() {
+    if ($('body').hasClass('mobile')) {
+        $('.body').css({ height: window.outerHeight});
+    }
+    window.addEventListener('load', this.handleLoad);
+ }
+
+ handleLoad() {
+  $.get("/userInfo",(data)=>{
+		if (data===null)//check if loged in
+            {
+                console.log("you are NOT logged in!");
+            }
+      else{
+          //$("#session").html("Session " + data.username); probably should load user icon,profile,etc
+          console.log("you are currently logged in!");
+          //enable button
+          this.setState({isEnabled: true, isLoggedIn: true});//arrow function used to keep scope of this
+      }
+      
+	});
+ }
+
+  handleButton(event) {
+      $.post("/pay",function(data){
+        if(data.error!==undefined){
+            console.log("" + data.error);
+            $( ".alert" ).alert('close');
+            $( "#alert" ).append( "<div class='alert alert-danger alert-dismissible' role='alert' style='margin-bottom: 10px'> <strong>" + data.error + "</strong><br /><a href='/signup' style='color: #721c24'>Don't have an Account?</a><button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span></button></div>" ); 
+        }
+          else if(data.redirect){
+                  window.location = data.redirect;
+            }
+            //server redirects to Paypal;
+	});
+    event.preventDefault();
+    //return false;
+  }
+
+  render() {
+    return (
+    <form onSubmit={this.handleButton}>
+       <div id="alert" className="text-center"></div>
+        <button rel="noopener" rel="nofollow" type="submit" className="btn btn-primary btn-lg " value="Buy"  disabled={!this.state.isEnabled}>Purchase</button>
+        
+    </form>
+    );
+  }
+}
+
+      ReactDOM.render(
+        React.createElement(PayPalButton, null),
+        document.getElementById('payButton')
+      );
+
+    </script>
+  </body>
+</html> 
+  

@@ -1,0 +1,113 @@
+{
+  "id": "PAY-0MP45380V56067513LO74R3I",
+  "intent": "sale",
+  "state": "approved",
+  "cart": "0WV32316SV728612V",
+  "payer": {
+    "payment_method": "paypal",
+    "status": "UNVERIFIED",
+    "payer_info": {
+      "email": "GaryTGoodell@jourrapide.com",
+      "first_name": "Gary",
+      "last_name": "Goodell",
+      "payer_id": "MZTMHYKUU6LK8",
+      "shipping_address": {
+        "recipient_name": "Gary Goodell",
+        "line1": "2224 Holden Street",
+        "city": "San Diego",
+        "state": "CA",
+        "postal_code": "92103",
+        "country_code": "US"
+      },
+      "country_code": "US"
+    }
+  },
+  "transactions": [
+    {
+      "amount": {
+        "total": "1.00",
+        "currency": "USD",
+        "details": {
+          
+        }
+      },
+      "payee": {
+        "merchant_id": "QRXN4HS77YL92",
+        "email": "PPX.DevNet-facilitator@gmail.com"
+      },
+      "description": "This is a basic boost, I will play a song to get you a new top score.",
+      "item_list": {
+        "items": [
+          {
+            "name": "Top Play",
+            "sku": "BSC-BST-1D",
+            "price": "1.00",
+            "currency": "USD",
+            "quantity": 1
+          }
+        ],
+        "shipping_address": {
+          "recipient_name": "Gary Goodell",
+          "line1": "2224 Holden Street",
+          "city": "San Diego",
+          "state": "CA",
+          "postal_code": "92103",
+          "country_code": "US"
+        }
+      },
+      "related_resources": [
+        {
+          "sale": {
+            "id": "7CB98514DU810652Y",
+            "state": "completed",
+            "amount": {
+              "total": "1.00",
+              "currency": "USD",
+              "details": {
+                "subtotal": "1.00"
+              }
+            },
+            "payment_mode": "INSTANT_TRANSFER",
+            "protection_eligibility": "ELIGIBLE",
+            "protection_eligibility_type": "ITEM_NOT_RECEIVED_ELIGIBLE,UNAUTHORIZED_PAYMENT_ELIGIBLE",
+            "transaction_fee": {
+              "value": "0.33",
+              "currency": "USD"
+            },
+            "receipt_id": "2807588970448317",
+            "parent_payment": "PAY-0MP45380V56067513LO74R3I",
+            "create_time": "2018-10-11T22:13:35Z",
+            "update_time": "2018-10-11T22:13:35Z",
+            "links": [
+              {
+                "href": "https://api.sandbox.paypal.com/v1/payments/sale/7CB98514DU810652Y",
+                "rel": "self",
+                "method": "GET"
+              },
+              {
+                "href": "https://api.sandbox.paypal.com/v1/payments/sale/7CB98514DU810652Y/refund",
+                "rel": "refund",
+                "method": "POST"
+              },
+              {
+                "href": "https://api.sandbox.paypal.com/v1/payments/payment/PAY-0MP45380V56067513LO74R3I",
+                "rel": "parent_payment",
+                "method": "GET"
+              }
+            ],
+            "soft_descriptor": "PAYPAL *PPXDEVNETST"
+          }
+        }
+      ]
+    }
+  ],
+  "create_time": "2018-10-11T22:13:35Z",
+  "links": [
+    {
+      "href": "https://api.sandbox.paypal.com/v1/payments/payment/PAY-0MP45380V56067513LO74R3I",
+      "rel": "self",
+      "method": "GET"
+    }
+  ],
+  "httpStatusCode": 200
+}

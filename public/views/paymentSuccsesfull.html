@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--   -->
+<html lang="en">
+  <head>
+   <meta charset="utf-8"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<style>
+body {
+    background-color: rgb(200,255,200);
+    height: 100%;
+}
+h1 {
+    color: green;
+}
+
+</style>
+        <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+    
+    <title>Osu! Boosting</title>
+  </head>
+   <body>  
+<div id="root"></div>
+<script type="text/babel">
+
+//Create a component.
+class reDirect extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleButton = this.handleButton.bind(this);
+  }
+
+  handleButton() {
+      window.location="/session";
+  }
+
+  render() {
+    return (
+    <div>
+  <div className="d-flex flex-column justify-content-around align-items-center" style={{ height: '100vh' }}>
+  <div><h1 className="text-center" style={{padding: 'calc(1vw + 1vh)'}}><i className="far fa-check-circle" style={{ color: 'green',  fontSize: '150%' }}></i><br />Purchase Succsessfull</h1></div>
+  <div>
+  <button onClick={this.handleButton} rel="noopener" rel="nofollow" type="submit" className="btn btn-lg" style={{ backgroundColor: 'green' , color: 'rgb(200,255,200)'}}>View Order Status <i className="fas fa-caret-right"></i></button>
+  </div>
+  <div></div>
+</div>
+   </div> 
+    );
+  }
+}
+
+      ReactDOM.render(
+        React.createElement(reDirect, null),
+        document.getElementById('root')
+      );
+
+    </script>
+  </body>
+</html> 
+  
