@@ -7,13 +7,17 @@
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
            <style>
 body {
-    background-color: rgb(248,193,193);
+    background-color: rgb(0,0,0);
+    color: white;
 }
 h1 {
     color: white;
 }
 .nav-link {
-    color: rgba(0,0,0,1)!important;        
+    color: rgb(255, 255, 255)!important;        
+}
+.navbar-brand {
+    color: rgb(255, 255, 255)!important; 
 }
 </style>
         <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -22,14 +26,13 @@ h1 {
   </head>
    <body>  
 
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:  transparent!important">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:  transparent!important">
     <div class="d-flex flex-grow-1">
         <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
         <a class="navbar-brand d-none d-lg-inline-block" href="/">
             Back
         </a>
         <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="/session">
-            <img src="//placehold.it/40?text=LOGO" alt="logo">
         </a>
         <div class="w-100 text-right">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
@@ -52,20 +55,19 @@ h1 {
     </div>
 </nav>
 
-
-<div style="background:rgb(248,193,193) !important" class="jumbotron jumbotron-fluid">
+<!-- background:rgb(248,193,193) -->
+<div style="background:rgb(0, 0, 0) !important" class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4 text-center">About Ripple PP Boosting</h1>
     <br>
     <p class="lead ">This is a rank boosting website for a competitive game Osu!, where users order a boost FOR FREE for thier ripple account. ripple is a clone of the Osu! server, link for thoose who don't know <a href="https://ripple.moe/">https://ripple.moe/</a>.
-    I intended to charge 1$ but thier are alot of legal issues when collecting money so the government can tax me and make bank, but I just wanted my website to be finished so I took a shortcut and made it free. I will eventualy start charging 1$.
+    I made this website for development practice.
     </p> 
     <h5>How to use this website</h5>
     <p class="lead ">After signing up and confirming your email you can now purchase an order. Do NOT use real information at checkout, this is a fake sandbox environment so you can submit fake data. Use FakeNameGenerator to fill up the paypal form. If you fill out these forms often I would recomend downloading my chrome extension Pay-Pal-Form-Filler.</p>
     <h5>Development</h5>
     <p class="lead "> I made this website mainly for programming expirence this site was made using Mongo Express (jquery React bootstrap 4) Node and I made one developer tool which was a Chrome extension to fill out paypal forms with data from FakeName Generator, also paypal uses Angular so I had to inject data into an Angualr form.
-        While making the admin control pannel(CRM) it was the most difficult part that no one will see except me the admin. If anyone is also a web-developer never use react with a Jquery plugin, after several children nodes deep React will stop updating when using a jquery plugin, it ended up so that state would only update through binding nodes and node traversal. It's definitly better using only Jquery or only React.
-        In my case I used footable, I ended up needing to modify the plugins source code which was minified >.< however I was able to understand what varible a,b,c, and d was if you know what I mean. In the end it's faster to create a responive table from scratch don't mix Jquery and React like I did. React sucks at handleing Jquery plugins although Im not sure if other frameworks are better or worse.
+        The admin control pannel was the most difficult part that no one will see except me the admin. A problem I ran into was mixing Jquery and React. React is not good at handleing Jquery plugins although Im not sure if other frameworks are better or worse.
     </p>
     <h5>Terms and conditions</h5>
     <p class="lead ">The Terms and conditions may update at any time. You are responsible for being up to date with the latest version of the terms and conditions. 
@@ -81,7 +83,9 @@ h1 {
 </div>
       
      
-
+<script>
+    $.get("https://api.countapi.xyz/hit/osuBoost/About");
+</script>
   </body>
 </html> 
   
